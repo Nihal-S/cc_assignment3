@@ -178,8 +178,7 @@ def count_l():
     try:
         f = open("count.txt","r")
         count = f.readline()
-        count = int(count)
-        count += 1 
+        count = int(count) 
         f.close()
         res = []
         res.append(count)
@@ -202,6 +201,19 @@ def count_reset():
         print(e)
         res = jsonify
         return res,500
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
+
+        f = open("count.txt","w")
+        f.write(str(count))
+        f.close()
+        return {},405
 
 if __name__ == '__main__':
 	app.debug=True    

@@ -352,7 +352,6 @@ def count_reset():
 
 @app.route('/api/v1/rides/count', methods=['GET'])
 def ride_count():
-    try:
         f = open("count.txt","r")
         count = f.readline()
         count = int(count)
@@ -366,14 +365,26 @@ def ride_count():
         c = conn.cursor()
         query = "SELECT COUNT(*) FROM ride"
         c.execute(query)
+        res = c.fetchall()
         conn.commit()
         conn.close()
-        res = jsonify()
-        return res, 200                
-    except Exception as e:
-        print(e)
-        res = jsonify()
-        return res,500
+        res = "["+ str(res[0][0]) +"]"
+        print(res)
+        return res, 200
+    
+
+@app.errorhandler(405)
+def method_not_allowed(e):
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
+
+        f = open("count.txt","w")
+        f.write(str(count))
+        f.close()
+        return {},405
 
 if __name__ == '__main__':
 	app.debug=True    

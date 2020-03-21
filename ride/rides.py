@@ -234,15 +234,9 @@ def join_rides(ride_id):
         names = names.json()
         l = []
         for i in ride_ids:
-            l.append(str(i[0]))
-        ride_ids = l
-        #l = []
-        #for i in names:
-        #    l.append(i[0])
-        #names = l
-        username = request.json['username']
-        username = str(username)
-        if(not ride_id):
+            l.append(str(i[0]))     query = "SELECT COUNT(*) FROM ride"
+        c.execute(query)
+        conn.commit()
             return jsonify(), 204
         # print(username in names)
         print(ride_id)
@@ -368,7 +362,8 @@ def ride_count():
         c.execute(query)
         conn.commit()
         conn.close()
-        res = jsonify()
+        res = c.fetchall()
+        res = "["+ len(res) +"]"
         return res, 200                
     except Exception as e:
         print(e)

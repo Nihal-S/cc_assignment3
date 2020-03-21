@@ -352,7 +352,6 @@ def count_reset():
 
 @app.route('/api/v1/rides/count', methods=['GET'])
 def ride_count():
-    try:
         f = open("count.txt","r")
         count = f.readline()
         count = int(count)
@@ -371,10 +370,7 @@ def ride_count():
         res = c.fetchall()
         res = "["+ len(res) +"]"
         return res, 200                
-    except Exception as e:
-        print(e)
-        res = jsonify()
-        return res,500
+    
 
 if __name__ == '__main__':
 	app.debug=True    

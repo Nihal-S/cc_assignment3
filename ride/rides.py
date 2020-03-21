@@ -234,7 +234,7 @@ def join_rides(ride_id):
         names = names.json()
         l = []
         for i in ride_ids:
-            l.append(str(i[0]))     query = "SELECT COUNT(*) FROM ride"
+            l.append(str(i[0]))   
         c.execute(query)
         conn.commit()
             return jsonify(), 204

@@ -202,6 +202,19 @@ def count_reset():
         res = jsonify
         return res,500
 
+@app.error_handler(405)
+def method_not_allowed(e):
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
+
+        f = open("count.txt","w")
+        f.write(str(count))
+        f.close()
+        return {},405
+
 if __name__ == '__main__':
 	app.debug=True    
 	app.run( host="0.0.0.0",port=80)

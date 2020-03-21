@@ -73,7 +73,7 @@ def create_ride():
         source = request.json['source']
         destination = request.json['destination']
         name = created_by
-        names = requests.get('http://54.156.28.141:80/api/v1/users')
+        names = requests.get('http://cc-a3-1486621832.us-east-1.elb.amazonaws.com/api/v1/users')
         names = names.json()
         #names = names.json()
         areanames = requests.post('http://0.0.0.0:80/api/v1/db/read', json={"table": "Areaname","columns":"Area_no","where":"Area_name!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
@@ -230,7 +230,7 @@ def join_rides(ride_id):
         ride_ids = requests.post('http://0.0.0.0:80/api/v1/db/read', json={"table": "ride","columns":"ride_id","where":"ride_id!='2341356'"})
         ride_ids = ride_ids.json()
         print(ride_ids)
-        names = requests.get('http://54.156.28.141:80/api/v1/users')
+        names = requests.get('http://cc-a3-1486621832.us-east-1.elb.amazonaws.com/api/v1/users')
         names = names.json()
         l = []
         for i in ride_ids:

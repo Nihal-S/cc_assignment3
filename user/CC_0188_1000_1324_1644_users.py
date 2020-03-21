@@ -6,9 +6,6 @@ import string
 import datetime
 app = Flask(__name__)
 
-global count
-count = 0
-
 def validate(date_text):
     try:
         datetime.datetime.strptime(date_text, '%d-%m-%Y:%S-%M-%H')
@@ -61,9 +58,16 @@ def read():
 
 @app.route('/api/v1/users', methods=['PUT'])
 def add():
-    global count
-    count += 1
     try:
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
+
+        f = open("count.txt","w")
+        f.write(str(count))
+        f.close()
         name = request.json['username']
         password = request.json['password']
         insert = "'"+name+"','"+password+"'"
@@ -91,9 +95,16 @@ def add():
 
 @app.route('/api/v1/users/<string:name>', methods=['DELETE'])
 def delete(name):
-    global count
-    count += 1
     try:
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
+
+        f = open("count.txt","w")
+        f.write(str(count))
+        f.close()
         name = str(name)
         names = requests.post('http://127.0.0.1:80/api/v1/db/read', json={"table": "users","columns":"username","where":"username!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
         names = names.json()
@@ -122,9 +133,16 @@ def delete(name):
 
 @app.route('/api/v1/users', methods=['GET'])
 def list_all_users():
-    global count
-    count += 1
-    try:
+    # try:
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
+
+        f = open("count.txt","w")
+        f.write(str(count))
+        f.close()
         users = requests.post('http://127.0.0.1:80/api/v1/db/read', json={"table":"users","columns":"username","where":"username!='wdjfuhwiufhwihfhwjhf'"})
         users = users.json()
         l = [i[0] for i in users]
@@ -133,10 +151,10 @@ def list_all_users():
         else:
             return jsonify(l), 200
 
-    except Exception as e:
-        print(e)
-        res = jsonify()
-        return res,500
+    # except Exception as e:
+    #     print(e)
+    #     res = jsonify()
+    #     return res,500
 
 @app.route('/api/v1/db/clear', methods=['POST'])
 def clear_db():
@@ -158,6 +176,11 @@ def clear_db():
 @app.route('/api/v1/_count', methods=['GET'])
 def count_l():
     try:
+        f = open("count.txt","r")
+        count = f.readline()
+        count = int(count)
+        count += 1 
+        f.close()
         res = []
         res.append(count)
         res = str(res)
@@ -170,8 +193,9 @@ def count_l():
 @app.route('/api/v1/_count', methods=['DELETE'])
 def count_reset():
     try:
-        global count
-        count = 0
+        f = open("count.txt","w")
+        f.write("0")
+        f.close()
         res = jsonify()
         return res,200
     except Exception as e:

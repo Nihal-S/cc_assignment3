@@ -178,8 +178,7 @@ def count_l():
     try:
         f = open("count.txt","r")
         count = f.readline()
-        count = int(count)
-        count += 1 
+        count = int(count) 
         f.close()
         res = []
         res.append(count)

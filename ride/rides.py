@@ -365,9 +365,9 @@ def ride_count():
         c = conn.cursor()
         query = "SELECT COUNT(*) FROM ride"
         c.execute(query)
+        res = c.fetchall()
         conn.commit()
         conn.close()
-        res = c.fetchall()
         res = "["+ len(res) +"]"
         return res, 200                
     

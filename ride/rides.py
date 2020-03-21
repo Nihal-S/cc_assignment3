@@ -373,7 +373,7 @@ def ride_count():
         return res, 200
     
 
-@app.error_handler(405)
+@app.errorhandler(405)
 def method_not_allowed(e):
         f = open("count.txt","r")
         count = f.readline()

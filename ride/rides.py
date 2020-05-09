@@ -129,18 +129,18 @@ def upcoming_ride():
         if request.method == "GET":
             source = request.args.get('source')
             destination = request.args.get('destination')
-            areanames = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "Areaname","columns":"Area_no","where":"Area_name!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
-            areanames = areanames.json()
+            # areanames = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "Areaname","columns":"Area_no","where":"Area_name!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
+            # areanames = areanames.json()
             l = []
-            for i in areanames:
-                l.append(str(i[0]))
-            areanames = l
-            print(areanames)
-            print(source in areanames)
-            print(destination in areanames)
+            # for i in areanames:
+            #     l.append(str(i[0]))
+            # areanames = l
+            # print(areanames)
+            # print(source in areanames)
+            # print(destination in areanames)
             if(not source or not destination):
                 return jsonify(), 204
-            if(source in areanames and destination in areanames):
+            if(int(source) >= 1 and int(source) <= 198 and int(destination) >= 1 and int(destination) <= 198):
                 names = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "ride","columns":"ride_id,created_by,timestamp","where":"source='"+source+"' and destination='"+destination+"'"})
                 names = names.json()
                 l = []

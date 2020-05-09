@@ -73,34 +73,35 @@ def create_ride():
         source = request.json['source']
         destination = request.json['destination']
         name = created_by
-        names = requests.get('http://34.226.72.34:80/api/v1/users')
+        names = requests.get('http://54.156.28.141:80/api/v1/users')
+        print(names)
         names = names.json()
         #names = names.json()
-        areanames = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "Areaname","columns":"Area_no","where":"Area_name!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
-        areanames =areanames.json()
-        #print(areanames)
+        # areanames = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "Areaname","columns":"Area_no","where":"Area_name!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
+        # areanames =areanames.json()
+        # print(areanames)
         #l = []
         #for i in names:
         #    l.append(i[0])
         #names = l
         l = []
         #print(names)
-        for i in areanames:
-            l.append(str(i[0]))
-        areanames = l
+        # for i in areanames:
+        #     l.append(str(i[0]))
+        # areanames = l
         if(not created_by or not timestamp or not source or not destination):
             return jsonify(), 204
         # print(name)
         # print(names)
         print(source)
-        print(areanames)
-        #print(areanames)
-        # print(source,destination)
-        # print(name in names)
-        # print(validate(timestamp))
+        # print(areanames)
+        # print(areanames)
+        print(source,destination)
+        print(name in names)
+        print(validate(timestamp))
         # print(source in areanames)
         # print(destination in areanames)
-        if(name in names and validate(timestamp) and str(source) in areanames and destination in areanames):
+        if(name in names and validate(timestamp) and int(source) >= 1 and int(source) <= 198 and int(destination) >= 1 and int(destination) <= 198):
             print("inside ")
             insert = "'"+created_by+"',"+"'"+timestamp+"',"+"'"+source+"','"+destination+"'"
             print(insert)

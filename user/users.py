@@ -71,14 +71,14 @@ def add():
         name = request.json['username']
         password = request.json['password']
         insert = "'"+name+"','"+password+"'"
-        names = requests.post('http://127.0.0.1:80/api/v1/db/read', json={"table": "users","columns":"username","where":"username!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
+        names = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "users","columns":"username","where":"username!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
         names = names.json()
         l = []
         for i in names:
             l.append(i[0])
         names = l
         if(len(password) == 40 and if_hex(password) and name not in names):
-            requests.post('http://127.0.0.1:80/api/v1/db/write', json={"insert": insert,"column":"username,password","table":"users","what":"insert"})
+            requests.post('http://34.226.72.34:80/api/v1/db/write', json={"insert": insert,"column":"username,password","table":"users","what":"insert"})
             res = jsonify()
             #res.statuscode = 201
             return res, 201
@@ -106,7 +106,7 @@ def delete(name):
         f.write(str(count))
         f.close()
         name = str(name)
-        names = requests.post('http://127.0.0.1:80/api/v1/db/read', json={"table": "users","columns":"username","where":"username!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
+        names = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "users","columns":"username","where":"username!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})
         names = names.json()
         l = []
         for i in names:
@@ -116,7 +116,7 @@ def delete(name):
         print(names)
         if(name in names):
             print("username='"+name+"'")
-            requests.post('http://127.0.0.1:80/api/v1/db/write', json={"insert": "username='"+name+"'","column":"","table":"users","what":"delete"})
+            requests.post('http://34.226.72.34:80/api/v1/db/write', json={"insert": "username='"+name+"'","column":"","table":"users","what":"delete"})
             res = jsonify()
             # res.statuscode = 201
             return res, 200
@@ -143,7 +143,7 @@ def list_all_users():
         f = open("count.txt","w")
         f.write(str(count))
         f.close()
-        users = requests.post('http://127.0.0.1:80/api/v1/db/read', json={"table":"users","columns":"username","where":"username!='wdjfuhwiufhwihfhwjhf'"})
+        users = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table":"users","columns":"username","where":"username!='wdjfuhwiufhwihfhwjhf'"})
         users = users.json()
         l = [i[0] for i in users]
         if(len(l) == 0):

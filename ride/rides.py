@@ -73,7 +73,7 @@ def create_ride():
         source = request.json['source']
         destination = request.json['destination']
         name = created_by
-        names = requests.get('http://cc-a3-1486621832.us-east-1.elb.amazonaws.com/api/v1/users')
+        names = requests.get('http://34.226.72.34:80/api/v1/users')
         names = names.json()
         #names = names.json()
         areanames = requests.post('http://34.226.72.34:80/api/v1/db/read', json={"table": "Areaname","columns":"Area_no","where":"Area_name!='hdughuhuhfguihufdhuidhgfuhduhgiu'"})

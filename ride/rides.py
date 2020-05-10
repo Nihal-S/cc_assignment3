@@ -151,8 +151,10 @@ def upcoming_ride():
                         "timestamp":i[2]
                     }
                     l.append(dict)
-
-                return jsonify(l), 200
+                if(len(l) != 0):
+                    return jsonify(l), 200
+                else:
+                    return jsonify(),204
             else:
                 res = jsonify()
                 # res.statuscode = 400

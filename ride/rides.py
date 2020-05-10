@@ -73,7 +73,7 @@ def create_ride():
         source = request.json['source']
         destination = request.json['destination']
         name = created_by
-        names = requests.get('http://54.156.28.141:80/api/v1/users')
+        names = requests.get('http://cc-a3-1486621832.us-east-1.elb.amazonaws.com:80/api/v1/users')
         print(names)
         names = names.json()
         #names = names.json()
